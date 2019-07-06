@@ -1,0 +1,38 @@
+function Spin(s) {
+    var m = s.match(/\{(.*?)\}/i);
+    if ( !m ) return s;
+
+    var t = m[1];
+
+    if ( t.indexOf("{") !== false )
+    {
+        t = t.substr(t.lastIndexOf("{") + 1);
+    }
+
+    var parts = t.split("|");
+
+    var regex = new RegExp("\{" + preg_quote(t) + "\}");
+    s = s.replace( regex, parts[Math.floor(Math.random() * parts.length)] );
+
+    return Spin(s);
+}
+
+function preg_quote(str, delimiter) 
+{
+  return String(str).replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + (delimiter || '') + '-]', 'g'), '\\$&');
+}
+var text = "{Hello|Hi|Hola}, How {have you been|are you doing}? Take care. {{Thanks and|Best} Regards|Cheers|Thanks}";
+
+var prev = "";
+
+var getNewSpun = function(prevSpun) {
+     var newspun = Spin(text);   
+     while (newspun == prevSpun) {
+       newspun = Spin(text);   
+     }
+     return newspun; 
+};
+
+
+prev = getNewSpun(prev);
+console.log(prev);
