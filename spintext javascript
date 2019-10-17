@@ -18,9 +18,9 @@ function preg_quote(str, delimiter) {
 function gSpin(a){
 	var prev = "";
 	var getNewSpun = function(prevSpun) {
-		var newspun = spinEng(text);
+		var newspun = spinEng(a);
 		while (newspun == prevSpun) {
-			newspun = spinEng(text);   
+			newspun = spinEng(a);   
 		}
 		return newspun;
 	};
