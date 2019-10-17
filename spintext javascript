@@ -16,15 +16,19 @@ function preg_quote(str, delimiter) {
 }
 
 function gSpin(a){
-	function getNewSpun(){
-		var newspun = spinEng(a);
-        	var dataprev = sessionStorage.getItem('prev13');
-		while (newspun == dataprev) {
-			newspun = spinEng(a);
-		}
-		sessionStorage.removeItem('prev13');
-		return newspun;
-	}
+    function getNewSpun(){
+        var newspun = spinEng(a);
+        var dataprev = sessionStorage.getItem('prev13');
+        var cek = a.includes("|");
+        var cek2 = a.includes("}");
+        if(cek && cek2){
+            while (newspun == dataprev) {
+                newspun = spinEng(a);
+            }
+        }
+        sessionStorage.removeItem('prev13');
+        return newspun;
+    }
 	var prev = getNewSpun();
 	sessionStorage.setItem('prev13', prev);
 	return prev;
